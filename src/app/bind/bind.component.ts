@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { setTimeout } from 'timers';
-
+import { FormControl } from '@angular/forms';
+import 'rxjs/Rx'
 @Component({
   selector: 'app-bind',
   templateUrl: './bind.component.html',
@@ -8,6 +8,8 @@ import { setTimeout } from 'timers';
 })
 export class BindComponent implements OnInit {
 
+  //通过绑定input的属性后可以发送事件流
+  serchInput:FormControl=new FormControl();
 
   divClass:string;
   isSetFront:boolean = true;
@@ -28,12 +30,25 @@ export class BindComponent implements OnInit {
       c:true
     }},3000);
 
+    //观察者进行订阅前台input
+    this.serchInput.valueChanges
+    //import 'rxjs/Rx' 延迟500毫秒相应
+      .debounceTime(500)
+      .subscribe(
+      stockCode=>this.getStockInfo(stockCode)
+    );
+
 
    }
 
   ngOnInit() {
   }
 
+  getStockInfo(value:string){
+    console.log(value);
+  }
+
+  
   //接受任意事件
   doOnClick(event:any){
     console.log(event);
