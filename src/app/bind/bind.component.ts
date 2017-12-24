@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-bind',
@@ -7,7 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BindComponent implements OnInit {
 
-  constructor() { }
+
+  divClass:string;
+  isSetFront:boolean = true;
+
+  ngDivClass:any={
+    a:false,
+    b:false,
+    c:false
+  }
+  constructor() {
+    //使用匿名函数三秒后改变CSS
+    setTimeout(()=>{this.divClass="a b c"},3000);
+
+
+    setTimeout(()=>{this.ngDivClass={
+      a:true,
+      b:true,
+      c:true
+    }},3000);
+
+
+   }
 
   ngOnInit() {
   }
