@@ -12,4 +12,9 @@ export class BindComponent implements OnInit {
   ngOnInit() {
   }
 
+  //接受任意事件
+  doOnClick(event:any){
+    console.log(event);
+  }
+
 }
